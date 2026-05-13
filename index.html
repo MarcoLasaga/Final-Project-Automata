@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regnum Mathematica — Royal Mathematical System</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+</head>
+<body class="dark-mode">
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <canvas id="particle-canvas"></canvas>
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-crown">♛</div>
+      <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+      <div class="loader-text">Initializing Royal System…</div>
+    </div>
+  </div>
+  <div id="splash" class="screen hidden">
+    <div class="splash-bg-glow"></div>
+    <div class="splash-content">
+      <div class="splash-emblem">♛</div>
+      <h1 class="splash-title">Regnum<br/><span class="gold">Mathematica</span></h1>
+      <p class="splash-sub">A Royal Mathematical Computation System</p>
+      <p class="splash-quote"><em>"Mathematics is the queen of sciences and arithmetic the queen of mathematics."</em><br/>— Carl Friedrich Gauss</p>
+      <button class="btn-royal btn-enter" id="btn-enter">Enter the Royal System</button>
+      <div class="splash-music-note" id="autoplay-notice" style="display:none">
+        🎵 Click anywhere to enable the royal soundtrack
+      </div>
+    </div>
+  </div>
+  <div id="menu" class="screen hidden">
+    <header class="royal-header">
+      <div class="header-crown">♛</div>
+      <div class="header-title-block">
+        <h2 class="header-title">Regnum Mathematica</h2>
+        <span class="header-sub">Royal Mathematical System</span>
+      </div>
+      <div class="header-controls">
+        <button class="btn-icon" id="theme-toggle" title="Toggle Theme">☀</button>
+        <button class="btn-icon" id="about-btn" title="About">ℹ</button>
+      </div>
+    </header>
+    <div class="music-player" id="music-player">
+      <span class="music-icon">♪</span>
+      <span class="music-label">Moonlight Sonata</span>
+      <button class="music-btn" id="play-pause-btn">▶</button>
+      <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.4" class="volume-slider" />
+      <span class="volume-icon">🔊</span>
+    </div>
+    <main class="menu-main">
+      <div class="menu-intro">
+        <h3 class="menu-heading">Choose Your Mathematical Realm</h3>
+        <p class="menu-desc">Select a domain of mathematical inquiry to begin your royal computation.</p>
+      </div>
+      <div class="card-grid" id="card-grid">
+      </div>
+    </main>
+    <footer class="royal-footer">
+      <span>♛ Regnum Mathematica &copy; 2025 — Crafted with Mathematical Elegance ♛</span>
+    </footer>
+  </div>
+  <div id="computation" class="screen hidden">
+    <header class="royal-header">
+      <button class="btn-icon btn-back" id="comp-back">&#8592;</button>
+      <div class="header-title-block">
+        <h2 class="header-title" id="comp-title">Fibonacci Sequence</h2>
+        <span class="header-sub" id="comp-subtitle">Enter parameters below</span>
+      </div>
+      <div class="header-controls">
+        <button class="btn-icon" id="theme-toggle-comp" title="Toggle Theme">☀</button>
+      </div>
+    </header>
+    <main class="comp-main">
+      <div class="comp-formula-card" id="comp-formula-card">
+      </div>
+      <div class="comp-form-card" id="comp-form-card">
+      </div>
+    </main>
+  </div>
+  <div id="result" class="screen hidden">
+    <header class="royal-header">
+      <div class="header-crown">♛</div>
+      <div class="header-title-block">
+        <h2 class="header-title" id="result-title">Result</h2>
+        <span class="header-sub">Royal Computation Complete</span>
+      </div>
+    </header>
+    <main class="result-main">
+      <div class="result-card" id="result-card">
+      </div>
+      <div class="result-steps-card" id="result-steps-card">
+      </div>
+      <div class="result-actions">
+        <p class="result-cta">Would you like to try another transaction?</p>
+        <div class="result-btns">
+          <button class="btn-royal btn-yes" id="btn-yes">✦ Yes, Continue</button>
+          <button class="btn-royal btn-no" id="btn-no">✦ No, Farewell</button>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div id="goodbye" class="screen hidden">
+    <div class="goodbye-content">
+      <div class="goodbye-emblem">♛</div>
+      <h2 class="goodbye-title">Farewell, Noble Scholar</h2>
+      <p class="goodbye-quote"><em>"In mathematics you don't understand things. You just get used to them."</em><br/>— John von Neumann</p>
+      <p class="goodbye-sub">May your calculations always be true and your proofs forever elegant.</p>
+      <button class="btn-royal" id="btn-restart">Return to the Realm</button>
+    </div>
+  </div>
+  <div id="about-modal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div class="modal-crown">♛</div>
+      <h3 class="modal-title">About Regnum Mathematica</h3>
+      <p class="modal-body">
+        <strong>Regnum Mathematica</strong> is a royal mathematical computation system built with pure HTML, CSS, and JavaScript — no frameworks, no backend.
+      </p>
+      <p class="modal-body">It features seven classical mathematical algorithms: Fibonacci, Lucas, Tribonacci, Collatz Conjecture, Bernoulli Numbers, Euclidean Division, and GCD & LCM computation.</p>
+      <div class="modal-credits">
+        <h4>Credits</h4>
+        <ul>
+          <li>🎵 Music: Moonlight Sonata — Ludwig van Beethoven (Public Domain)</li>
+          <li>✦ Mathematical Algorithms: Classical Mathematics</li>
+          <li>✦ Fonts: Cinzel &amp; Cormorant Garamond (Google Fonts)</li>
+          <li>✦ Design: Glassmorphism &amp; Royal Aesthetic System</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="toast-container"></div>
+  <audio id="bg-music" loop preload="auto">
+    <source src="https://upload.wikimedia.org/wikipedia/commons/4/4a/beethoven-moonlight-sonata-op27-2-mvt1.ogg" type="audio/ogg" />
+    <source src="https://www.youtube.com/watch?v=4Tr0otuiQuU&list=RD4Tr0otuiQuU&start_radio=1" type="audio/mpeg" />
+  </audio>
+  <script src="script.js"></script>
+</body>
+</html>
